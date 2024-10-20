@@ -29,6 +29,9 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+STATICFILES_DIRS = [
+    BASE_DIR / 'static_dev',
+]
 
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
