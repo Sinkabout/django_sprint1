@@ -1,18 +1,5 @@
 from django.shortcuts import render
 
-
-def index(request):
-    pass
-
-
-def post_detail(request, id):
-    pass
-
-
-def category_slug(request, category_slug):
-    pass
-
-
 posts = [
     {
         'id': 0,
@@ -55,3 +42,17 @@ posts = [
                 укутывал их, чтобы не испортились от дождя.''',
     },
 ]
+
+
+def index(request):
+    template = 'blog/index.html'
+    context = {'posts': posts}
+    return render(request, template, context)
+
+
+def post_detail(request, id):
+    pass
+
+
+def category_slug(request, category_slug):
+    pass
