@@ -52,13 +52,15 @@ def index(request):
 
 def post_detail(request, id):
     template = 'blog/detail.html'
-    post = next((post for post in posts if post['id'] == id), None)
-    return render(request, template, {'post': post})
+    context = {
+        'post': posts[id],
+    }
+    return render(request, template, context)
 
 
 def category_slug(request, category_slug):
     template = 'blog/category.html'
     context = {
-        'category': category_slug,
+        'category_name': category_slug
     }
     return render(request, template, context)
