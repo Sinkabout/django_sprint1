@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponseNotFound
 
 posts = [
     {
@@ -46,7 +47,9 @@ posts = [
 
 def index(request):
     template = 'blog/index.html'
-    context = {'posts': posts}
+    context = {
+        'posts': reversed(posts),
+    }
     return render(request, template, context)
 
 
@@ -60,7 +63,13 @@ def post_detail(request, id):
 
 def category_posts(request, category_slug):
     template = 'blog/category.html'
-    context = {
-        'category_name': category_slug
-    }
-    return render(request, template, context)
+    context = dict()
+    for post in posts:
+        if post['category'] == category_slug:
+            context = {
+                'category_name': post,
+            }
+    if len(context) == 0:
+        return HttpResponseNotFound("<h1>Page Not Found</h1>")
+    else:
+        return render(request, template, context)
