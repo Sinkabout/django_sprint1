@@ -51,8 +51,14 @@ def index(request):
 
 
 def post_detail(request, id):
-    pass
+    template = 'blog/detail.html'
+    post = next((post for post in posts if post['id'] == id), None)
+    return render(request, template, {'post': post})
 
 
 def category_slug(request, category_slug):
-    pass
+    template = 'blog/category.html'
+    context = {
+        'category' : category_slug,
+    }
+    return render(request, template, context)
