@@ -55,10 +55,16 @@ def index(request):
 
 def post_detail(request, id):
     template = 'blog/detail.html'
-    context = {
-        'post': posts[id],
-    }
-    return render(request, template, context)
+    context = dict()
+    for post in posts:
+        if post['id'] == id:
+            context = {
+                'post': posts[id],
+            }
+    if len(context) == 0:
+        return HttpResponseNotFound("<h1>Page Not Found</h1>")
+    else:
+        return render(request, template, context)
 
 
 def category_posts(request, category_slug):
