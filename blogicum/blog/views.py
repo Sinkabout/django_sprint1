@@ -68,18 +68,5 @@ def post_detail(request, id):
 
 
 def category_posts(request, category_slug):
-    #template = 'blog/category.html'
-    '''
-    context = dict()
-    for post in posts:
-        if post['category'] == category_slug:
-            context = {
-                'category_name': post,
-            }
-    if len(context) == 0:
-        return HttpResponseNotFound("<h1>Page Not Found</h1>")
-    else:
-        return render(request, template, context)
-    '''
     context = {'category_slug': category_slug}
     return render(request, 'blog/category.html', context)
